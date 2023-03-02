@@ -1,4 +1,4 @@
-B_choose_lang = "Выберите язык"
+B_choose_lang = "Set the language"
 
 
 B_capture_info = {
