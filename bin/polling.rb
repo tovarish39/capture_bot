@@ -22,8 +22,6 @@ end
 def handle_lang
     $lg = $mes.data.split('/').first.to_sym
     delete_pushed()
-    video_path = "#{__dir__}/../video/video.mp4"
-    send_video(video_path)
     send_message(B_capture_info[$lg])
     sending_photo_with_smiles()
 end
@@ -53,6 +51,12 @@ def failure
     sending_photo_with_smiles()
 end
 
+def starting
+    video_path = "#{__dir__}/../video/video.mp4"
+    send_video(video_path)
+    send_message(B_choose_lang, IM_langs.call)
+end
+
 Telegram::Bot::Client.run(token) do |bot|
     bot.listen do |message|
         $mes = message        
@@ -62,9 +66,8 @@ Telegram::Bot::Client.run(token) do |bot|
         from_group = $mes.class == MessageClass ? $mes.chat.type == 'group' : $mes.message.chat.type == 'group'
 
         unless from_group  
-    puts 'come'
-            if    text_mes?('/start')
-                send_message(B_choose_lang, IM_langs.call)
+    puts $mes.data if $mes.class == CallbackClass
+            if    text_mes?('/start')    ; starting()
             elsif data?(/выбранный язык/); handle_lang()
             elsif data?(/true/)          ; success()
             elsif data?(/false/)         ; failure()
