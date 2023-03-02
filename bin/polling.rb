@@ -4,7 +4,9 @@ require "#{__dir__}/../head/requires.rb"
 bot_main_chat_id     = '5676653907'
 bot_capture_chait_id = '5965916617'
 token                = ENV["Capture_bot"]
-Groupe_id            = '-831562777'
+# Groupe_id            = '-831562777'
+Groupe_id            = '-1001632706756'
+
 
 def sending_photo_with_smiles
     images_path = "#{__dir__}/../images"
@@ -78,6 +80,9 @@ Telegram::Bot::Client.run(token) do |bot|
         $chat_id = $mes.class == MessageClass ? $mes.chat.id : $mes.message.chat.id
 
         from_group = $mes.class == MessageClass ? $mes.chat.type == 'group' : $mes.message.chat.type == 'group'
+# puts '!'
+# puts $mes.inspect
+# puts '!'
         if !from_group
             if    text_mes?('/start')    ; starting()
             elsif data?(/true/)          ; success()
@@ -88,4 +93,3 @@ Telegram::Bot::Client.run(token) do |bot|
 
     end
 end
-
