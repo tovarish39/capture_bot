@@ -44,7 +44,8 @@ def success
      
     lg = $mes.data.split('/').first.to_sym
 
-    invite_link = "<a href='#{res['result']['invite_link']}'>\"Link\"</a>"
+    invite_link = res['result']['invite_link']
+    # invite_link = "<a href='#{res['result']['invite_link']}'>\"Link\"</a>"
     
     text =  B_successs_head[lg]
     text << B_successs_tail[lg]
