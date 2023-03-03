@@ -5,7 +5,7 @@ UpdateMember   = Telegram::Bot::Types::ChatMemberUpdated
 
 RM = ->(keyboard)           {Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard:keyboard, resize_keyboard:true)}
 IM = ->(inline_keyboard)    {Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard:inline_keyboard)}
-IB = ->(text, callback_data){Telegram::Bot::Types::InlineKeyboardButton.new(text:text, callback_data:callback_data)}
+IB = ->(text, callback_data, url = nil){Telegram::Bot::Types::InlineKeyboardButton.new(text:text, callback_data:callback_data, url:url)}
 
 def send_message text, reply_markup = nil
   $bot.send_message(chat_id: $chat_id, text:text, reply_markup:reply_markup, parse_mode:"HTML")
