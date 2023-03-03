@@ -30,9 +30,9 @@ B_choose_corresponding_animal = {
 }
 
 B_successs_head = {
-    ru:"Капча пройдена успешно!\nТвоя ссылка для вступления:",
-    en:"Done! Congratulations!\nThat's your link to join the chat:",
-    es:"¡Exitoso!\nEse es su enlace para unirse:"
+    ru:"Капча пройдена успешно!\nТвоя ссылка для вступления:\n",
+    en:"Done! Congratulations!\nThat's your link to join the chat:\n",
+    es:"¡Exitoso!\nEse es su enlace para unirse:\n"
 }
 
 B_successs_tail = {
