@@ -46,4 +46,4 @@ Smile_lines = {
 
 IM_langs   = ->{IM.call([IB_ru.call, IB_en.call, IB_es.call])}
 IM_smiles  = ->(line){IM.call([IBs_smiles.call(line).sort_by{ rand } ])}
-IM_link    = ->(link)(IM.call(IB.call('Link', nil, link)))
+IM_link    = ->(link){IM.call(IB.call('Link', nil, link))}
