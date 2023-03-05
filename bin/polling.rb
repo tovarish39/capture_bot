@@ -47,8 +47,7 @@ def success
     invite_link = res['result']['invite_link']
     # invite_link = "<a href='#{res['result']['invite_link']}'>\"Link\"</a>"
     
-    text =  B_successs_head[lg]
-    text << B_successs_tail[lg]
+    text =  B_successs_head[lg] + B_successs_tail[lg]
 
     send_message(text, IM_link.call(invite_link))
 end
