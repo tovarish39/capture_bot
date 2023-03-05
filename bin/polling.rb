@@ -69,19 +69,25 @@ def starting
     send_message(B_choose_lang, IM_langs.call)
 end
 
-
+def returning
+    return
+end
 
 Telegram::Bot::Client.run(token) do |bot|
     bot.listen do |message|
         $mes = message        
         $bot = bot.api
-        $chat_id = $mes.class == MessageClass ? $mes.chat.id : $mes.message.chat.id
+# только для текстовых сообщений и callback
+        if    $mes.class == MessageClass
+            $chat_id = $mes.chat.id
+            from_group = $mes.chat.type == 'group'
+        elsif $mes.class == CallbackClass
+            $chat_id = $mes.message.chat.id
+            from_group = $mes.message.chat.type == 'group'
+        end
 
-        from_group = $mes.class == MessageClass ? $mes.chat.type == 'group' : $mes.message.chat.type == 'group'
-# puts '!'
-# puts $mes.inspect
-# puts '!'
-        if !from_group
+        if    !$chat_id;                 ; returning()                    
+        elsif !from_group
             if    text_mes?('/start')    ; starting()
             elsif data?(/true/)          ; success()
             elsif data?(/false/)         ; failure()
