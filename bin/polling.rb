@@ -43,13 +43,9 @@ def success
     )
      
     lg = $mes.data.split('/').first.to_sym
-
     invite_link = res['result']['invite_link']
-    # invite_link = "<a href='#{res['result']['invite_link']}'>\"Link\"</a>"
     
-    text =  B_successs_head[lg] + B_successs_tail[lg]
-
-    send_message(text, IM_link.call(invite_link))
+    send_message(B_successs[lg], IM_link.call(invite_link))
 end
 
 def failure

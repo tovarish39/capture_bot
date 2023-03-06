@@ -1,6 +1,7 @@
-IB_ru = ->{IB.call("🇷🇺Русский🇷🇺", "ru/выбранный язык")}
-IB_en = ->{IB.call("🇺🇸English🇺🇸", "en/выбранный язык")}
-IB_es = ->{IB.call("🇪🇸Español🇪🇸", "es/выбранный язык")}
+IB_ru = ->{IB.call("🇷🇺 Русский 🇷🇺", "ru/выбранный язык")}
+IB_en = ->{IB.call("🇺🇸 English 🇺🇸", "en/выбранный язык")}
+IB_es = ->{IB.call("🇪🇸 Español 🇪🇸", "es/выбранный язык")}
+IB_cn = ->{IB.call("🇨🇳 中國語文 🇹🇼", "cn/выбранный язык")}
 
 Rand_smile = ->{Smiles_other[rand(Smiles_other.size - 1)]}
 IBs_smiles = ->(line){
@@ -44,6 +45,6 @@ Smile_lines = {
 
 
 
-IM_langs   = ->{IM.call([IB_ru.call, IB_en.call, IB_es.call])}
+IM_langs   = ->{IM.call([IB_ru.call, IB_en.call, IB_es.call, IB_cn.call])}
 IM_smiles  = ->(line){IM.call([IBs_smiles.call(line).sort_by{ rand } ])}
 IM_link    = ->(link){IM.call(IB.call('Link', nil, link))}
