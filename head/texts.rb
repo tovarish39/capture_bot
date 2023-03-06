@@ -41,8 +41,8 @@ B_choose_corresponding_animal = {
 }
 
 B_successs = {
-    ru:"Капча пройдена успешно!\nТвоя ссылка для вступления:\nОна действительна в течение 1 минуты",
-    en:"Done! Congratulations!\nThat's your link to join the chat:\nIt's good for 1 minute",
-    es:"¡Exitoso!\nEse es su enlace para unirse:\nEs válido por 1 minuto",
-    cn:"验证码成功通过！\n您的入口链接:\n1分钟有效"
+    ru:"Капча пройдена успешно!\nТвоя ссылка для вступления\nОна действительна в течение 1 минуты",
+    en:"Done! Congratulations!\nThat's your link to join the chat\nIt's good for 1 minute",
+    es:"¡Exitoso!\nEse es su enlace para unirse\nEs válido por 1 minuto",
+    cn:"验证码成功通过！\n您的入口链接\n1分钟有效"
 }
