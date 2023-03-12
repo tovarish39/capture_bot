@@ -45,7 +45,10 @@ def success
     lg = $mes.data.split('/').first.to_sym
     invite_link = res['result']['invite_link']
     
-    send_message(B_successs[lg], IM_link.call(invite_link))
+    send_message(
+        B_successs[lg], 
+        IM_link.call(invite_link)
+    )
 end
 
 def failure
