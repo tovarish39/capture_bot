@@ -61,7 +61,7 @@ def success_for_channel
     rescue => exception
         
     end
-    res = $bot.create_channel_invite_link(
+    res = $bot.create_chat_invite_link(
         chat_id:Channel_id,
         member_limit:1,
         expire_date: Time.now.to_i + 60
@@ -152,9 +152,9 @@ Telegram::Bot::Client.run(token) do |bot|
         if    !$chat_id;                 ; returning()                    
         # elsif true;                 ; returning()                    
         elsif !from_group
-puts $mes.data
-puts data?(/true\/капча_для_канала/)
-puts data?(/false\/капча_для_канала/)
+# puts $mes.data
+# puts data?(/true\/капча_для_канала/)
+# puts data?(/false\/капча_для_канала/)
 
             if    text_mes?('/start')    ; starting()
 
