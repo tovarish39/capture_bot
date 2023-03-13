@@ -10,7 +10,7 @@ IBs_smiles = ->(line){
     line.each do |obj|
         smile   = obj.keys.first
         boolean = obj.values.first
-        buttons <<  IB.call(smile,           "#{$lg}/#{boolean}/#{$action_to}" )
+        buttons <<  IB.call(smile,           "#{$lg}/#{boolean}" )
     end
     buttons
 }
@@ -32,7 +32,10 @@ Smile_lines = {
 
 IM_langs        = ->{IM.call([IB_ru.call, IB_en.call, IB_es.call, IB_cn.call, IB_fr.call])}
 IM_smiles       = ->(line){IM.call([IBs_smiles.call(line).sort_by{ rand } ])}
-IM_chat_link    = ->(link){IM.call(IB.call(T_chat[$lg], nil, link))}
+IM_links    = ->(chat_link, channel_link){IM.call([
+    IB.call(T_chat[$lg], nil, chat_link),
+    IB.call(T_channel[$lg], nil, channel_link)
+    ])}
 IM_channel_link = ->(link){IM.call(IB.call(T_channel[$lg], nil, link))}
 
 

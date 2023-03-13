@@ -28,7 +28,9 @@ end
 def handle_lang
     $lg = $mes.data.split('/').first.to_sym
 
-    edit_message(B_greeting[$lg], IM_offer_links[$lg].call)
+    # edit_message(B_to_chat[$lg])
+    get_capture()
+    # edit_message(B_greeting[$lg], IM_offer_links[$lg].call)
     
     # edit_message(B_capture_info[$lg])
     # sending_photo_with_smiles()
@@ -55,24 +57,35 @@ def success_for_chat
     )
 end
 
-def success_for_channel
+def success
     begin
         delete_pushed()
     rescue => exception
         
     end
-    res = $bot.create_chat_invite_link(
+    res_chat = $bot.create_chat_invite_link(
         chat_id:Channel_id,
         member_limit:1,
         expire_date: Time.now.to_i + 60
     )
      
     $lg = $mes.data.split('/').first.to_sym
-    invite_link = res['result']['invite_link']
+    invite_link_chat = res_chat['result']['invite_link']
     
+    res_channel = $bot.create_chat_invite_link(
+        chat_id:Groupe_id,
+        member_limit:1,
+        expire_date: Time.now.to_i + 60
+    )
+     
+    lg = $mes.data.split('/').first.to_sym
+    invite_link_channel = res_channel['result']['invite_link']
+
+
+
     send_message(
         B_successs[$lg], 
-        IM_channel_link.call(invite_link)
+        IM_links.call(invite_link_chat, invite_link_channel)
     )
 end
 
@@ -82,12 +95,12 @@ def failure_for_chat
     rescue => exception
         
     end
-    $action_to = 'капча_для_чата'
+    # $action_to = 'капча_для_чата'
     $lg = $mes.data.split('/').first.to_sym
     sending_photo_with_smiles()
 end
 
-def failure_for_channel
+def failure
     begin
         delete_pushed()
     rescue => exception
@@ -108,9 +121,9 @@ def returning
     return
 end
 
-def get_capture_for_chat
+def get_capture
     $lg = $mes.data.split('/').first.to_sym
-    $action_to = 'капча_для_чата'
+    # $action_to = 'капча_для_чата'
     getting_capture(B_to_chat[$lg])
 end
 
@@ -147,7 +160,8 @@ Telegram::Bot::Client.run(token) do |bot|
 # puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
 
 
-
+        begin
+            
 
         if    !$chat_id;                 ; returning()                    
         # elsif true;                 ; returning()                    
@@ -158,19 +172,28 @@ Telegram::Bot::Client.run(token) do |bot|
 
             if    text_mes?('/start')    ; starting()
 
-            elsif data?(/запрос_на_чат/)            ; get_capture_for_chat()
-            elsif data?(/true\/капча_для_чата/)     ; success_for_chat()
-            elsif data?(/false\/капча_для_чата/)    ; failure_for_chat()
-                
-            elsif data?(/запрос_на_канал/)            ; get_capture_for_channel()
-            elsif data?(/true\/капча_для_канала/)     ; success_for_channel()
-            elsif data?(/false\/капча_для_канала/)    ; failure_for_channel()
+            # elsif data?(/запрос_на_чат/)            ; get_capture_for_chat()
+            # elsif data?(/true\/капча_для_чата/)     ; success_for_chat()
+            # elsif data?(/false\/капча_для_чата/)    ; failure_for_chat()
+
+        # elsif data?(/запрос_на_чат/)            ; get_capture_for_chat()
+        elsif data?(/true/)     ; success()
+        elsif data?(/false/)    ; failure()
+
+
+            # elsif data?(/запрос_на_канал/)            ; get_capture_for_channel()
+            # elsif data?(/true\/капча_для_канала/)     ; success_for_channel()
+            # elsif data?(/false\/капча_для_канала/)    ; failure_for_channel()
             
 
             # elsif data?(/true/)          ; success()
             # elsif data?(/false/)         ; failure()
             elsif data?(/выбранный язык/); handle_lang()
             end
+        end
+
+        rescue => exception
+            puts exception  
         end
 
     end
