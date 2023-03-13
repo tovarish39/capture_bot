@@ -64,7 +64,7 @@ def success
         
     end
     res_chat = $bot.create_chat_invite_link(
-        chat_id:Channel_id,
+        chat_id:Groupe_id,
         member_limit:1,
         expire_date: Time.now.to_i + 60
     )
@@ -73,12 +73,11 @@ def success
     invite_link_chat = res_chat['result']['invite_link']
     
     res_channel = $bot.create_chat_invite_link(
-        chat_id:Groupe_id,
+        chat_id: Channel_id,
         member_limit:1,
         expire_date: Time.now.to_i + 60
     )
      
-    lg = $mes.data.split('/').first.to_sym
     invite_link_channel = res_channel['result']['invite_link']
 
 
