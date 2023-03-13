@@ -152,6 +152,10 @@ Telegram::Bot::Client.run(token) do |bot|
         if    !$chat_id;                 ; returning()                    
         # elsif true;                 ; returning()                    
         elsif !from_group
+puts $mes.data
+puts data?(/true\/капча_для_канала/)
+puts data?(/false\/капча_для_канала/)
+
             if    text_mes?('/start')    ; starting()
 
             elsif data?(/запрос_на_чат/)            ; get_capture_for_chat()
@@ -159,7 +163,7 @@ Telegram::Bot::Client.run(token) do |bot|
             elsif data?(/false\/капча_для_чата/)    ; failure_for_chat()
                 
             elsif data?(/запрос_на_канал/)            ; get_capture_for_channel()
-            elsif data?(/true\/капча_для_каналa/)     ; success_for_channel()
+            elsif data?(/true\/капча_для_канала/)     ; success_for_channel()
             elsif data?(/false\/капча_для_канала/)    ; failure_for_channel()
             
 
