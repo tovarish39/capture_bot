@@ -1,6 +1,6 @@
 require "#{__dir__}/../head/requires.rb"
 
-
+My_chat_id = '1964112204'
 bot_main_chat_id     = '5676653907'
 bot_capture_chait_id = '5965916617'
 token                = ENV["Capture_bot"]
@@ -8,6 +8,8 @@ token                = ENV["Capture_bot"]
 Groupe_id            = '-1001632706756'
 
 Channel_id           = '-1001176838228'
+
+
 
 def sending_photo_with_smiles
     images_path = "#{__dir__}/../images"
@@ -152,23 +154,12 @@ Telegram::Bot::Client.run(token) do |bot|
             from_group = $mes.message.chat.type == 'supergroup'
             # from_group = $mes.message.chat.type == 'group'
         end
-# puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-# puts $mes.inspect
-# puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-# puts $mes.chat.type
-# puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-
 
         begin
             
 
         if    !$chat_id;                 ; returning()                    
-        # elsif true;                 ; returning()                    
         elsif !from_group
-# puts $mes.data
-# puts data?(/true\/капча_для_канала/)
-# puts data?(/false\/капча_для_канала/)
-
             if    text_mes?('/start')    ; starting()
 
             # elsif data?(/запрос_на_чат/)            ; get_capture_for_chat()
@@ -192,7 +183,7 @@ Telegram::Bot::Client.run(token) do |bot|
         end
 
         rescue => exception
-            puts exception  
+            $bot.send_message(text:exception, chat_id:My_chat_id)
         end
 
     end
