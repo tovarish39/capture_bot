@@ -158,7 +158,8 @@ Telegram::Bot::Client.run(token) do |bot|
         begin
             
 
-        if    !$chat_id;                 ; returning()                    
+        if    !$chat_id;                 ; returning()
+        elsif  text_mes?('error'); raise 'error'                    
         elsif !from_group
             if    text_mes?('/start')    ; starting()
 
