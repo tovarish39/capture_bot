@@ -184,7 +184,8 @@ Telegram::Bot::Client.run(token) do |bot|
         end
 
         rescue => exception
-            $bot.send_message(text:exception, chat_id:My_chat_id)
+            $bot.send_message(text:exception, chat_id:My_chat_id)    
+            $bot.send_message(text:exception.backtrace, chat_id:My_chat_id)    
         end
 
     end
