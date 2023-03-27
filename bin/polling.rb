@@ -144,6 +144,7 @@ Telegram::Bot::Client.run(token) do |bot|
     bot.listen do |message|
         $mes = message        
         $bot = bot.api
+        begin
 # только для текстовых сообщений и callback
         if    $mes.class == MessageClass
             $chat_id = $mes.chat.id
@@ -155,7 +156,7 @@ Telegram::Bot::Client.run(token) do |bot|
             # from_group = $mes.message.chat.type == 'group'
         end
 
-        begin
+
             
 
         if    !$chat_id;                 ; returning()
