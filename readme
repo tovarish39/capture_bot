@@ -1,0 +1,7 @@
+# crontab 
+SCHEDULE_CAPTURE_BOT_PATH=/home/g/projects/capture_bot/schedule
+WRAP_FILE_NAME=wrap.sh
+
+# check_capture_bot_on_running.rb
+* * * * * /bin/bash ${SCHEDULE_CAPTURE_BOT_PATH}/${WRAP_FILE_NAME} check_captur>
+

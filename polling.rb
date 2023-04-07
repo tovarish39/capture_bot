@@ -1,4 +1,8 @@
-require "#{__dir__}/../head/requires.rb"
+pid_file_path="#{ENV['HOME']}/projects/capture_bot/tmp/pids.txt"
+File.delete(pid_file_path) if File.exist?(pid_file_path)
+File.open(pid_file_path, 'a') {|pids_file| pids_file.puts Process.pid}
+
+require "#{__dir__}/head/requires.rb"
 
 My_chat_id = '1964112204'
 bot_main_chat_id     = '5676653907'
@@ -12,7 +16,7 @@ Channel_id           = '-1001176838228'
 
 
 def sending_photo_with_smiles
-    images_path = "#{__dir__}/../images"
+    images_path = "#{__dir__}/images"
     photos = Dir.entries(images_path)
     photos -= ['.']  if photos.include?('.')
     photos -= ['..'] if photos.include?('..')
@@ -38,26 +42,26 @@ def handle_lang
     # sending_photo_with_smiles()
 end
 
-def success_for_chat
-    begin
-        delete_pushed()
-    rescue => exception
+# def success_for_chat
+#     begin
+#         delete_pushed()
+#     rescue => exception
         
-    end
-    res = $bot.create_chat_invite_link(
-        chat_id:Groupe_id,
-        member_limit:1,
-        expire_date: Time.now.to_i + 60
-    )
+#     end
+#     res = $bot.create_chat_invite_link(
+#         chat_id:Groupe_id,
+#         member_limit:1,
+#         expire_date: Time.now.to_i + 60
+#     )
      
-    lg = $mes.data.split('/').first.to_sym
-    invite_link = res['result']['invite_link']
+#     lg = $mes.data.split('/').first.to_sym
+#     invite_link = res['result']['invite_link']
     
-    send_message(
-        B_successs[lg], 
-        IM_chat_link.call(invite_link)
-    )
-end
+#     send_message(
+#         B_successs[lg], 
+#         IM_chat_link.call(invite_link)
+#     )
+# end
 
 def success
     begin
@@ -65,12 +69,13 @@ def success
     rescue => exception
         
     end
+    send_message('asd')
+
     res_chat = $bot.create_chat_invite_link(
         chat_id:Groupe_id,
         member_limit:1,
         expire_date: Time.now.to_i + 60
     )
-     
     $lg = $mes.data.split('/').first.to_sym
     invite_link_chat = res_chat['result']['invite_link']
     
@@ -83,23 +88,22 @@ def success
     invite_link_channel = res_channel['result']['invite_link']
 
 
-
     send_message(
         B_successs[$lg], 
         IM_links.call(invite_link_chat, invite_link_channel)
     )
 end
 
-def failure_for_chat
-    begin
-        delete_pushed()
-    rescue => exception
+# def failure_for_chat
+#     begin
+#         delete_pushed()
+#     rescue => exception
         
-    end
-    # $action_to = 'капча_для_чата'
-    $lg = $mes.data.split('/').first.to_sym
-    sending_photo_with_smiles()
-end
+#     end
+#     # $action_to = 'капча_для_чата'
+#     $lg = $mes.data.split('/').first.to_sym
+#     sending_photo_with_smiles()
+# end
 
 def failure
     begin
@@ -113,7 +117,7 @@ def failure
 end
 
 def starting
-    video_path = "#{__dir__}/../video/video.mp4"
+    video_path = "#{__dir__}/video/video.mp4"
     send_video(video_path)
     send_message(B_choose_lang, IM_langs.call)
 end
@@ -163,30 +167,15 @@ Telegram::Bot::Client.run(token) do |bot|
         elsif  text_mes?('error'); raise 'error'                    
         elsif !from_group
             if    text_mes?('/start')    ; starting()
-
-            # elsif data?(/запрос_на_чат/)            ; get_capture_for_chat()
-            # elsif data?(/true\/капча_для_чата/)     ; success_for_chat()
-            # elsif data?(/false\/капча_для_чата/)    ; failure_for_chat()
-
-        # elsif data?(/запрос_на_чат/)            ; get_capture_for_chat()
-        elsif data?(/true/)     ; success()
-        elsif data?(/false/)    ; failure()
-
-
-            # elsif data?(/запрос_на_канал/)            ; get_capture_for_channel()
-            # elsif data?(/true\/капча_для_канала/)     ; success_for_channel()
-            # elsif data?(/false\/капча_для_канала/)    ; failure_for_channel()
-            
-
-            # elsif data?(/true/)          ; success()
-            # elsif data?(/false/)         ; failure()
+            elsif data?(/true/)     ; success()
+            elsif data?(/false/)    ; failure()
             elsif data?(/выбранный язык/); handle_lang()
             end
         end
 
         rescue => exception
             $bot.send_message(text:exception, chat_id:My_chat_id)    
-            $bot.send_message(text:exception.backtrace, chat_id:My_chat_id)    
+            # $bot.send_message(text:exception.backtrace, chat_id:My_chat_id)    
         end
 
     end
