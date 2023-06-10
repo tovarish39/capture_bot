@@ -1,4 +1,4 @@
-pid_file_path="#{ENV['HOME']}/projects/capture_bot/tmp/pids.txt"
+pid_file_path="#{ENV['HOME']}/capture_bot/tmp/pids.txt"
 File.delete(pid_file_path) if File.exist?(pid_file_path)
 File.open(pid_file_path, 'a') {|pids_file| pids_file.puts Process.pid}
 
