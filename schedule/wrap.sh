@@ -1,17 +1,16 @@
 #!/bin/bash
-source /home/g/.bashrc
+source /root/.bashrc
 
-
-RUBY=/home/g/.rbenv/shims/ruby
-BUNDLE=/home/g/.rbenv/shims/bundle
-CAPTURE_BOT_PLLING_FILE_PATH=/home/g/projects/capture_bot/polling.rb
+RUBY=$(which ruby)
+BUNDLE=$(which bundle)
+CAPTURE_BOT_PLLING_FILE_PATH=/root/capture_bot/polling.rb
 
 CHECK_capture_bot_on_running=check_capture_bot_on_running.rb
-OUTPUT_FILE_PATH=/home/g/projects/capture_bot/tmp/output_from-wrap_sh.txt
+OUTPUT_FILE_PATH=/root/capture_bot/tmp/output_from-wrap_sh.txt
 
 touch $OUTPUT_FILE_PATH
 
-pids_file_path='/home/g/projects/capture_bot/tmp/pids.txt'
+pids_file_path='/root/capture_bot/tmp/pids.txt'
 
 pid=$(head -n 1 $pids_file_path)
 
